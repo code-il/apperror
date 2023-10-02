@@ -1,0 +1,67 @@
+Flutter
+Intro:
+•	In general, developing a mobile application is a complex and challenging task. 
+•	There are many frameworks available to develop a mobile application. 
+•	Android provides a native framework based on Java language and iOS provides a native framework based on Objective-C / Swift language. However for different OS we need to code in two different languages using two different framework that’s where flutter comes in.
+a simple and high performance framework based on Dart language, provides high performance by rendering the UI directly in the operating system’s canvas rather than through native framework.
+Features:
+•	Modern and reactive framework.
+•	Uses Dart programming language and it is very easy to learn.
+•	Fast development.
+•	Beautiful and fluid user interfaces.
+•	Huge widget catalog.
+•	Runs same UI for multiple platforms.
+•	High performance application.
+Advantages:
+•	Flutter comes with beautiful and customizable widgets for high performance and outstanding mobile application. It fulfills all the custom needs and requirements. Besides these, Flutter offers many more advantages as mentioned below −
+•	Dart has a large repository of software packages which lets you to extend the capabilities of your application.
+•	Developers need to write just a single code base for both applications (both Android and iOS platforms). Flutter may to be extended to other platform as well in the future.
+•	Flutter needs lesser testing. Because of its single code base, it is sufficient if we write automated tests once for both the platforms.
+•	Flutter’s simplicity makes it a good candidate for fast development. Its customization capability and extendibility makes it even more powerful.
+Disadvantages: Despite its many advantages, flutter has the following drawbacks in it ---
+•	Since it is coded in Dart language, a developer needs to learn new language (though it is easy to learn).
+•	Modern framework tries to separate logic and UI as much as possible but, in Flutter, user interface and logic is intermixed. We can overcome this using smart coding and using high level module to separate user interface and logic.
+•	Flutter is yet another framework to create mobile application.
+Architectures:
+Widgets: The core concept of the Flutter framework is In Flutter, Everything is a widget. Widgets are basically user interface components used to create the user interface of the application. The application is the top- level widget and its UI is build using one or more children (widgets), which again build using its children widgets. This composability feature helps us to create a user interface of any complexity.
+•	MyApp is the user created widget and it is build using the Flutter native widget, MaterialApp.
+•	MaterialApp has a home property to specify the user interface of the home page, which is again a user created widget, MyHomePage.
+•	MyHomePage is build using another flutter native widget, Scaffold
+•	Scaffold has two properties – body and appBar
+•	body is used to specify its main user interface and appBar is used to specify its header user interface
+•	Header UI is build using flutter native widget, AppBar and Body UI is build using Center widget.
+•	The Center widget has a property, Child, which refers the actual content and it is build using Text widget
+Gestures: GestureDetector is an invisible widget having the ability to capture user interactions such as tapping, dragging, etc., of its child widget. Many native widgets of Flutter support interaction through the use of GestureDetector.
+States: Widget needs to be derived from StatefulWidget widget to support state maintenance and all other widget should be derived from StatefulWidget.
+Layers: A layer is build using its immediate next level layer. The top most layer is widget specific to Android and iOS. The next layer has all flutter native widgets. The next layer is Rendering layer, which is low level renderer component and renders everything in the flutter app. Layers goes down to core platform specific code.
+Widgets:
+Types:
+ 	Platform specific widgets: Android specific widgets are designed in accordance with Material design guideline by Android OS. Android specific widgets are called as Material widgets.
+ 	iOS specific widgets are designed in accordance with Human Interface Guidelines by Apple and they are called as Cupertino widgets.
+ 	Ex-List view,table view
+ 	Layout widgets: Some of the popular layout widgets are as follows −
+Container − A rectangular box decorated using BoxDecoration widgets with background, border and shadow.
+Center − Center its child widget.
+Row − Arrange its children in the horizontal direction.
+Column − Arrange its children in the vertical direction.
+Stack − Arrange one above the another.
+ 	
+ 	State maintenance widgets:
+ 	Widget derived from StatelessWidget does not have any state information but it may contain widget derived from StatefulWidget. The dynamic nature of the application is through interactive behavior of the widgets and the state changes during interaction. For example, tapping a counter button will increase / decrease the internal state of the counter by one and reactive nature of the Flutter widget will auto re-render the widget using new state information
+ 	Platform independent / basic widgets:Ex- TEXT,IMAGE(image.asset,image.file)
+ 	Layouts:
+ 	Layout widgets can be grouped into two distinct category based on its child −
+ 	Widget supporting a single child:
+ 	In this category, widgets will have only one widget as its child and every widget will have a special layout functionality.Ex-Paddin,align
+ 	Widget supporting multiple child:
+ 	In this category, a given widget will have more than one child widgets and the layout of each widget is uniqueEx-Row,Column.
+ 	Gestures:
+ 	Gestures are primarily a way for a user to interact with a mobile (or any touch based device) application. Gestures are generally defined as any physical action / movement of a user in the intention of activating a specific control of the mobile device.
+ 	Some of the widely used gestures are mentioned here −
+ 	Tap − Touching the surface of the device with fingertip for a short period and then releasing the fingertip.
+ 	Double Tap − Tapping twice in a short time.
+ 	Drag − Touching the surface of the device with fingertip and then moving the fingertip in a steady manner and then finally releasing the fingertip.
+ 	Flick − Similar to dragging, but doing it in a speeder way.
+ 	Pinch − Pinching the surface of the device using two fingers.
+ 	Spread/Zoom − Opposite of pinching.
+ 	Panning − Touching the surface of the device with fingertip and moving it in any direction without releasing the fingertip.
