@@ -1,0 +1,72 @@
+<uses-permission android:name="android.permission.INTERNET"/>
+
+//////////////////////
+
+package com.example.lab5webview;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.sax.StartElementListener;
+import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class webviewthesecond extends AppCompatActivity {
+
+    Button b1;
+    TextView t2;
+    WebView wv1;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        /*t2=findViewById(R.id.textView3);
+        t2.setText("WEBVIEW");*/
+        setContentView(R.layout.activity_webviewthesecond);
+        b1= findViewById(R.id.buttonweb);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent main=new Intent(webviewthesecond.this,MainActivity.class);
+                startActivity(main);
+            }
+        });
+    wv1=findViewById(R.id.webv);
+    wv1.setWebViewClient(new WebViewClient(){
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if(url.startsWith("tel:")){
+                Intent intent= new Intent(Intent.ACTION_DIAL, Uri.parse(url));
+                startActivity(intent);
+                return true;
+            }
+            else if(url.startsWith("mailto:")){
+                Intent intent=new Intent(Intent.ACTION_VIEW,Uri.parse(url));//code of code-dil
+                startActivity(intent);
+                return true;
+            }
+            else{
+                view.loadUrl(url);
+                return true;
+            }
+        }
+    });
+    wv1.loadUrl("https://about.google/contact-google/");
+    //wv1.loadUrl("https://www.google.com");
+
+    WebSettings websettings=wv1.getSettings();
+    websettings.getJavaScriptEnabled();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(wv1.canGoBack()){
+            wv1.goBack();
+        }
+    }
+}
