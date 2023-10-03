@@ -1,0 +1,151 @@
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+
+//////////
+
+package com.example.lab6;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+    Button pb,vb;
+    TextView tm;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        tm=(TextView)findViewById(R.id.textView);
+        tm.setText("CAMERA APPLICATION");
+        pb=(Button) findViewById(R.id.button);
+        vb=(Button) findViewById(R.id.button2);
+
+        pb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent p=new Intent(MainActivity.this, photoactivity.class);
+                startActivity(p);
+            }
+        });
+        vb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent v=new Intent(MainActivity.this, videoactivity.class);
+                startActivity(v);
+            }
+        });
+    }
+}
+
+////////////
+
+package com.example.lab6;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+public class photoactivity extends AppCompatActivity {
+    Button photob;
+    ImageView photoim;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_photoactivity2);
+        photob=(Button) findViewById(R.id.button3);
+        photoim=(ImageView) findViewById(R.id.imageView2);
+        photob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent p=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(p,100);
+            }
+        });
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode==100 && resultCode==RESULT_OK){
+            Bitmap photo=(Bitmap) data.getExtras().get("data");
+            photoim.setImageBitmap(photo);
+        }
+        else{
+            Toast.makeText(this,"Cancelled",Toast.LENGTH_SHORT).show();
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+}
+
+/////////
+
+package com.example.lab6;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
+import android.widget.MediaController;
+import android.widget.VideoView;
+
+public class videoactivity extends AppCompatActivity {
+    VideoView v1;
+    Button b2;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_videoactivity);
+
+        v1=findViewById(R.id.videoView);
+        b2=findViewById(R.id.button3);
+
+        MediaController mdiac= new MediaController(this);
+        mdiac.setAnchorView(v1);
+        v1.setMediaController(mdiac);
+
+        v1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recordVideo(view);
+            }
+        });
+    }
+
+    public void recordVideo(View view){
+        Intent i=new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        startActivityForResult(i, 100);
+    }
+   @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode==100 && resultCode== RESULT_OK){
+            Uri vuri=data.getData();
+            v1.setVideoURI(vuri);
+            v1.start();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+}
+
+
